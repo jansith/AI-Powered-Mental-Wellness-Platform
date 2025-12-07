@@ -77,8 +77,18 @@ WSGI_APPLICATION = 'serene_space.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'db_serene_space',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES', default_storage_engine=INNODB",
+            'charset': 'utf8mb4',
+            'isolation_level': 'read committed',
+        },
+        'TIME_ZONE': 'UTC',
     }
 }
 
@@ -118,3 +128,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+AUTH_USER_MODEL = 'app_users.CustomUser'
+
+# In settings.py
+AUTH_USER_MODEL = 'app_users.CustomUser'
+
+# Media settings
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
