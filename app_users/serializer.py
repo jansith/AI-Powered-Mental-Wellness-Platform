@@ -91,3 +91,4 @@ class PatientProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = PatientProfile
         fields = '__all__'
+        read_only_fields = ('patient_id', 'user')
