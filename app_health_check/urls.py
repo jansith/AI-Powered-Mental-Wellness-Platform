@@ -37,4 +37,6 @@ urlpatterns = [
    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
    path('adhdquestions/', ADHDQuestionnaireApi.as_view()),
    path('depressionquestions/', DepressionQuestionnaireApi.as_view()),
+   path('adhdquestions/<int:id>/', ADHDQuestionnaireApi.as_view()),
+   path('depressionquestions/<int:id>/', DepressionQuestionnaireApi.as_view()),
 ]

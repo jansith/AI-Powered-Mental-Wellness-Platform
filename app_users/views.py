@@ -125,7 +125,7 @@ class DoctorProfileApi(APIView):
         try:
 
             if id is not None:
-                doctor_profile = DoctorProfile.objects.get(id=id)
+                doctor_profile = DoctorProfile.objects.get(user=id)
                 serializer = DoctorProfileSerializer(doctor_profile)
                 return Response({
                     'status': 'success',
@@ -223,7 +223,7 @@ class PatientProfileApi(APIView):
         try:
             
             if id is not None:
-                patient_profile = PatientProfile.objects.get(id=id)
+                patient_profile = PatientProfile.objects.get(user=id)
                 serializer = PatientProfileSerializer(patient_profile)
                 return Response({
                     'status': 'success',

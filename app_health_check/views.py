@@ -23,8 +23,18 @@ class ADHDQuestionnaireApi(APIView):
             'errors': serializer.errors
         }, status=status.HTTP_400_BAD_REQUEST)
     
-    def get(self, request):
+    def get(self, request, id=None):
         try:
+            if id is not None:
+                adhq_result = ADHDQuestionnaire.objects.get(user=id)
+                serializer = ADHDQuestionnaireSerializer(adhq_result)
+                return Response({
+                    'status': 'success',
+                    'message': 'ADHD result data retrieved successfully',
+                    'data': serializer.data,
+                    'count': serializer.data
+                }, status=status.HTTP_200_OK)
+        
             adhq_result = ADHDQuestionnaire.objects.all()
             serializer = ADHDQuestionnaireSerializer(adhq_result, many=True)
             return Response({
@@ -62,10 +72,20 @@ class DepressionQuestionnaireApi(APIView):
             'errors': serializer.errors
         }, status=status.HTTP_400_BAD_REQUEST)
     
-    def get(self, request):
+    def get(self, request, id=None):
         try:
+            if id is not None:
+                depression_result = DepressionQuestionnaire.objects.get(user=id)
+                serializer = DepressionQuestionnaireSerializer(depression_result)
+                return Response({
+                    'status': 'success',
+                    'message': 'Depression result data retrieved successfully',
+                    'data': serializer.data,
+                    'count': serializer.data
+                }, status=status.HTTP_200_OK)
+            
             depression_result = DepressionQuestionnaire.objects.all()
-            serializer = ADHDQuestionnaireSerializer(depression_result, many=True)
+            serializer = DepressionQuestionnaireSerializer(depression_result, many=True)
             return Response({
                 'status': 'success',
                 'message': 'Depression result data retrieved successfully',
