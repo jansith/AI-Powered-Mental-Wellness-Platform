@@ -59,7 +59,7 @@ class ADHDQuestionnaire(models.Model):
         super().save(*args, **kwargs)
     
     def __str__(self):
-        return f"ADHD Questionnaire - {self.user.username} - {self.created_at.date()}"
+        return f"ADHD Questionnaire - {self.user.full_name} - {self.created_at.date()}"
     
 
 
@@ -133,4 +133,4 @@ class DepressionQuestionnaire(models.Model):
         super().save(*args, **kwargs)
     
     def __str__(self):
-        return f"Depression Questionnaire - {self.user.username} - {self.created_at.date()}"
+        return f"Depression Questionnaire - {self.user.full_name} - {self.created_at.date()}"

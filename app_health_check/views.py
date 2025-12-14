@@ -23,6 +23,24 @@ class ADHDQuestionnaireApi(APIView):
             'errors': serializer.errors
         }, status=status.HTTP_400_BAD_REQUEST)
     
+    def get(self, request):
+        try:
+            adhq_result = ADHDQuestionnaire.objects.all()
+            serializer = ADHDQuestionnaireSerializer(adhq_result, many=True)
+            return Response({
+                'status': 'success',
+                'message': 'ADHD result data retrieved successfully',
+                'data': serializer.data,
+                'count': len(serializer.data)
+            }, status=status.HTTP_200_OK)
+        
+        except Exception as e:
+            return Response({
+                'status': 'error',
+                'message': 'Failed to retrieve ADHD result data',
+                'error': str(e)
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
 
 
 class DepressionQuestionnaireApi(APIView):
@@ -43,3 +61,21 @@ class DepressionQuestionnaireApi(APIView):
             'message': 'Depression Question answers creation failed',
             'errors': serializer.errors
         }, status=status.HTTP_400_BAD_REQUEST)
+    
+    def get(self, request):
+        try:
+            depression_result = DepressionQuestionnaire.objects.all()
+            serializer = ADHDQuestionnaireSerializer(depression_result, many=True)
+            return Response({
+                'status': 'success',
+                'message': 'Depression result data retrieved successfully',
+                'data': serializer.data,
+                'count': len(serializer.data)
+            }, status=status.HTTP_200_OK)
+        
+        except Exception as e:
+            return Response({
+                'status': 'error',
+                'message': 'Failed to retrieve depression result data',
+                'error': str(e)
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
